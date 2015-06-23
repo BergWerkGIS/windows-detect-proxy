@@ -30,15 +30,18 @@
 			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.IDC_eExit = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.label5 = new System.Windows.Forms.Label();
+			this.IDC_tbHttpWebRequest = new System.Windows.Forms.TextBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.IDC_tbRegistry = new System.Windows.Forms.TextBox();
 			this.IDC_tbSystemWebProxy = new System.Windows.Forms.TextBox();
 			this.IDC_tbDefaultWebProxy = new System.Windows.Forms.TextBox();
-			this.IDC_bCopyInfo = new System.Windows.Forms.Button();
-			this.label5 = new System.Windows.Forms.Label();
-			this.IDC_tbHttpWebRequest = new System.Windows.Forms.TextBox();
+			this.IDC_tbNTLM = new System.Windows.Forms.TextBox();
+			this.label6 = new System.Windows.Forms.Label();
+			this.IDC_tbCustomCreds = new System.Windows.Forms.TextBox();
+			this.label7 = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -78,9 +81,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.IDC_lvInfo.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
-			this.IDC_lvInfo.Location = new System.Drawing.Point(12, 274);
+			this.IDC_lvInfo.Location = new System.Drawing.Point(12, 318);
 			this.IDC_lvInfo.Name = "IDC_lvInfo";
-			this.IDC_lvInfo.Size = new System.Drawing.Size(557, 150);
+			this.IDC_lvInfo.Size = new System.Drawing.Size(557, 106);
 			this.IDC_lvInfo.TabIndex = 3;
 			this.IDC_lvInfo.UseCompatibleStateImageBehavior = false;
 			this.IDC_lvInfo.View = System.Windows.Forms.View.Details;
@@ -104,6 +107,10 @@
 			// 
 			this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox1.Controls.Add(this.label7);
+			this.groupBox1.Controls.Add(this.IDC_tbCustomCreds);
+			this.groupBox1.Controls.Add(this.label6);
+			this.groupBox1.Controls.Add(this.IDC_tbNTLM);
 			this.groupBox1.Controls.Add(this.label5);
 			this.groupBox1.Controls.Add(this.IDC_tbHttpWebRequest);
 			this.groupBox1.Controls.Add(this.label4);
@@ -114,10 +121,28 @@
 			this.groupBox1.Controls.Add(this.IDC_tbDefaultWebProxy);
 			this.groupBox1.Location = new System.Drawing.Point(12, 93);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(557, 146);
+			this.groupBox1.Size = new System.Drawing.Size(557, 190);
 			this.groupBox1.TabIndex = 5;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = " detexted proxy settings ";
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(6, 115);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(90, 13);
+			this.label5.TabIndex = 7;
+			this.label5.Text = "HttpWebRequest";
+			// 
+			// IDC_tbHttpWebRequest
+			// 
+			this.IDC_tbHttpWebRequest.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.IDC_tbHttpWebRequest.Location = new System.Drawing.Point(129, 112);
+			this.IDC_tbHttpWebRequest.Name = "IDC_tbHttpWebRequest";
+			this.IDC_tbHttpWebRequest.Size = new System.Drawing.Size(422, 20);
+			this.IDC_tbHttpWebRequest.TabIndex = 8;
 			// 
 			// label4
 			// 
@@ -173,40 +198,49 @@
 			this.IDC_tbDefaultWebProxy.Size = new System.Drawing.Size(422, 20);
 			this.IDC_tbDefaultWebProxy.TabIndex = 10;
 			// 
-			// IDC_bCopyInfo
+			// IDC_tbNTLM
 			// 
-			this.IDC_bCopyInfo.Location = new System.Drawing.Point(12, 245);
-			this.IDC_bCopyInfo.Name = "IDC_bCopyInfo";
-			this.IDC_bCopyInfo.Size = new System.Drawing.Size(75, 23);
-			this.IDC_bCopyInfo.TabIndex = 6;
-			this.IDC_bCopyInfo.Text = "copy info";
-			this.IDC_bCopyInfo.UseVisualStyleBackColor = true;
-			this.IDC_bCopyInfo.Click += new System.EventHandler(this.IDC_bCopyInfo_Click);
-			// 
-			// label5
-			// 
-			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(6, 115);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(90, 13);
-			this.label5.TabIndex = 7;
-			this.label5.Text = "HttpWebRequest";
-			// 
-			// IDC_tbHttpWebRequest
-			// 
-			this.IDC_tbHttpWebRequest.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.IDC_tbNTLM.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.IDC_tbHttpWebRequest.Location = new System.Drawing.Point(129, 112);
-			this.IDC_tbHttpWebRequest.Name = "IDC_tbHttpWebRequest";
-			this.IDC_tbHttpWebRequest.Size = new System.Drawing.Size(422, 20);
-			this.IDC_tbHttpWebRequest.TabIndex = 8;
+			this.IDC_tbNTLM.Location = new System.Drawing.Point(129, 138);
+			this.IDC_tbNTLM.Name = "IDC_tbNTLM";
+			this.IDC_tbNTLM.ReadOnly = true;
+			this.IDC_tbNTLM.Size = new System.Drawing.Size(422, 20);
+			this.IDC_tbNTLM.TabIndex = 16;
+			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Location = new System.Drawing.Point(6, 141);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(37, 13);
+			this.label6.TabIndex = 17;
+			this.label6.Text = "NTLM";
+			// 
+			// IDC_tbCustomCreds
+			// 
+			this.IDC_tbCustomCreds.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.IDC_tbCustomCreds.Location = new System.Drawing.Point(129, 164);
+			this.IDC_tbCustomCreds.Name = "IDC_tbCustomCreds";
+			this.IDC_tbCustomCreds.ReadOnly = true;
+			this.IDC_tbCustomCreds.Size = new System.Drawing.Size(422, 20);
+			this.IDC_tbCustomCreds.TabIndex = 18;
+			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Location = new System.Drawing.Point(8, 167);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(96, 13);
+			this.label7.TabIndex = 19;
+			this.label7.Text = "Custom credentials";
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(581, 436);
-			this.Controls.Add(this.IDC_bCopyInfo);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.IDC_eExit);
 			this.Controls.Add(this.IDC_lvInfo);
@@ -231,7 +265,6 @@
 		private System.Windows.Forms.ColumnHeader columnHeader1;
 		private System.Windows.Forms.Button IDC_eExit;
 		private System.Windows.Forms.GroupBox groupBox1;
-		private System.Windows.Forms.Button IDC_bCopyInfo;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label2;
@@ -240,6 +273,10 @@
 		private System.Windows.Forms.TextBox IDC_tbDefaultWebProxy;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.TextBox IDC_tbHttpWebRequest;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.TextBox IDC_tbNTLM;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.TextBox IDC_tbCustomCreds;
 	}
 }
 

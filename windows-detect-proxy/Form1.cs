@@ -19,6 +19,8 @@ namespace windows_detect_proxy {
 		}
 
 
+		private bool _NTLMDetected = false;
+		private bool _CustomCreds = false;
 		private string _TargetUrl;
 		private Uri _TargetUri;
 		private readonly string NO_PROXY = "no proxy";
@@ -39,11 +41,16 @@ namespace windows_detect_proxy {
 			if (!_TargetUrl.EndsWith( "/" )) { _TargetUrl += "/"; }
 			_TargetUri = new Uri( _TargetUrl );
 
+			WebRequest.DefaultWebProxy.Credentials = new NetworkCredential();
+			_NTLMDetected = false;
+			_CustomCreds = false;
 			IDC_lvInfo.Items.Clear();
 			IDC_tbDefaultWebProxy.Text = string.Empty;
 			IDC_tbSystemWebProxy.Text = string.Empty;
 			IDC_tbRegistry.Text = string.Empty;
 			IDC_tbHttpWebRequest.Text = string.Empty;
+			IDC_tbNTLM.Text = "no NTLM detected";
+			IDC_tbCustomCreds.Text = string.Empty;
 
 			try {
 				Cursor = Cursors.WaitCursor;
@@ -53,6 +60,12 @@ namespace windows_detect_proxy {
 				readRegistry();
 			}
 			finally {
+				if (_NTLMDetected) {
+					IDC_tbNTLM.Text = "NTLM detected: user your windows login credentials as proxy credentials";
+				}
+				if (_CustomCreds) {
+					IDC_tbCustomCreds.Text = "use your custom credentials as proxy credentials";
+				}
 				Cursor = Cursors.Default;
 			}
 		}
@@ -131,6 +144,10 @@ namespace windows_detect_proxy {
 			try {
 				log( "== testing registry settings ==" );
 
+
+				//TODO
+				//http://stackoverflow.com/a/9142909
+
 				WebProxy proxy = null;
 				IDC_tbRegistry.Text = NO_PROXY;
 
@@ -175,15 +192,92 @@ namespace windows_detect_proxy {
 
 		private void testRequest( IWebProxy proxy ) {
 
+			//authentication
+			//Working With Proxy Servers Get Your Internet App's Working With Them
+			//http://www.dreamincode.net/forums/topic/160555-working-with-proxy-servers/
 			try {
 				using (WebClient wc = new WebClient()) {
+					wc.UseDefaultCredentials = false;
+					proxy.Credentials = null;
 					wc.Proxy = proxy;
 					log( "connecting ..." );
 					try {
 						log( "response: " + wc.DownloadString( _TargetUri ) );
+						return;
+					}
+					catch (WebException wex) {
+						if (HttpStatusCode.ProxyAuthenticationRequired == ((HttpWebResponse)wex.Response).StatusCode) {
+							log( "authentication required" );
+						} else {
+							log( "response: " + wex.ToString(), true );
+							return;
+						}
 					}
 					catch (Exception ex2) {
 						log( "response: " + ex2.ToString(), true );
+						return;
+					}
+				}
+
+				log( "checking for NTLM authentication" );
+				//WebRequest.DefaultWebProxy.Credentials = CredentialCache.DefaultCredentials;
+				using (WebClient wc = new WebClient()) {
+					wc.UseDefaultCredentials = true;
+					proxy.Credentials = CredentialCache.DefaultCredentials;
+					wc.Proxy = proxy;
+					try {
+						log( "response: " + wc.DownloadString( _TargetUrl ) );
+						log( "NTLM authentication in place - use your Windows credentials when settings proxy user and password!!!", true );
+						_NTLMDetected = true;
+						return;
+					}
+					catch (WebException wex) {
+						if (HttpStatusCode.ProxyAuthenticationRequired == ((HttpWebResponse)wex.Response).StatusCode) {
+							log( "NTLM authentication failed", true );
+						} else {
+							log( "response: " + wex.ToString(), true );
+							return;
+						}
+					}
+					catch (Exception ex2) {
+						log( "response: " + ex2.ToString(), true );
+						return;
+					}
+				}
+
+				log( "checking for custom crededentials" );
+				string user;
+				string pwd;
+				using (Credentials creds = new Credentials()) {
+					if (DialogResult.Cancel == creds.ShowDialog()) {
+						log( "did not enter custom credentials", true );
+						return;
+					}
+					user = creds.User;
+					pwd = creds.Pwd;
+				}
+
+				using (WebClient wc = new WebClient()) {
+					wc.UseDefaultCredentials = false;
+					proxy.Credentials = new NetworkCredential( user, pwd );
+					wc.Proxy = proxy;
+					try {
+						log( "response: " + wc.DownloadString( _TargetUrl ) );
+						log( "custom credentials successful" );
+						_CustomCreds = true;
+						return;
+					}
+					catch (WebException wex) {
+						if (HttpStatusCode.ProxyAuthenticationRequired == ((HttpWebResponse)wex.Response).StatusCode) {
+							log( "custom credentials authentication failed", true );
+						} else {
+							log( "response: " + wex.ToString(), true );
+							return;
+						}
+					}
+					catch (Exception ex2) {
+						log( "response: " + ex2.ToString(), true );
+						return;
 					}
 				}
 			}
