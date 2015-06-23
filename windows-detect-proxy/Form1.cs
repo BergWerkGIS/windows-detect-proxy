@@ -206,7 +206,9 @@ namespace windows_detect_proxy {
 						return;
 					}
 					catch (WebException wex) {
-						if (HttpStatusCode.ProxyAuthenticationRequired == ((HttpWebResponse)wex.Response).StatusCode) {
+						if (null == wex.Response) {
+							log( "no reponse for " + _TargetUrl, true );
+						} else if (HttpStatusCode.ProxyAuthenticationRequired == ((HttpWebResponse)wex.Response).StatusCode) {
 							log( "authentication required" );
 						} else {
 							log( "response: " + wex.ToString(), true );
@@ -232,7 +234,9 @@ namespace windows_detect_proxy {
 						return;
 					}
 					catch (WebException wex) {
-						if (HttpStatusCode.ProxyAuthenticationRequired == ((HttpWebResponse)wex.Response).StatusCode) {
+						if (null == wex.Response) {
+							log( "no reponse for " + _TargetUrl, true );
+						} else if (HttpStatusCode.ProxyAuthenticationRequired == ((HttpWebResponse)wex.Response).StatusCode) {
 							log( "NTLM authentication failed", true );
 						} else {
 							log( "response: " + wex.ToString(), true );
@@ -268,7 +272,9 @@ namespace windows_detect_proxy {
 						return;
 					}
 					catch (WebException wex) {
-						if (HttpStatusCode.ProxyAuthenticationRequired == ((HttpWebResponse)wex.Response).StatusCode) {
+						if (null == wex.Response) {
+							log( "no reponse for " + _TargetUrl, true );
+						} else if (HttpStatusCode.ProxyAuthenticationRequired == ((HttpWebResponse)wex.Response).StatusCode) {
 							log( "custom credentials authentication failed", true );
 						} else {
 							log( "response: " + wex.ToString(), true );
