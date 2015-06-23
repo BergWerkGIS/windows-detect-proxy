@@ -30,13 +30,15 @@
 			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.IDC_eExit = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.IDC_bCopyInfo = new System.Windows.Forms.Button();
-			this.IDC_tbDefaultWebProxy = new System.Windows.Forms.TextBox();
-			this.IDC_tbSystemWebProxy = new System.Windows.Forms.TextBox();
-			this.IDC_tbRegistry = new System.Windows.Forms.TextBox();
-			this.label2 = new System.Windows.Forms.Label();
-			this.label3 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
+			this.IDC_tbRegistry = new System.Windows.Forms.TextBox();
+			this.IDC_tbSystemWebProxy = new System.Windows.Forms.TextBox();
+			this.IDC_tbDefaultWebProxy = new System.Windows.Forms.TextBox();
+			this.IDC_bCopyInfo = new System.Windows.Forms.Button();
+			this.label5 = new System.Windows.Forms.Label();
+			this.IDC_tbHttpWebRequest = new System.Windows.Forms.TextBox();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -102,6 +104,8 @@
 			// 
 			this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox1.Controls.Add(this.label5);
+			this.groupBox1.Controls.Add(this.IDC_tbHttpWebRequest);
 			this.groupBox1.Controls.Add(this.label4);
 			this.groupBox1.Controls.Add(this.label3);
 			this.groupBox1.Controls.Add(this.label2);
@@ -115,51 +119,14 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = " detexted proxy settings ";
 			// 
-			// IDC_bCopyInfo
+			// label4
 			// 
-			this.IDC_bCopyInfo.Location = new System.Drawing.Point(12, 245);
-			this.IDC_bCopyInfo.Name = "IDC_bCopyInfo";
-			this.IDC_bCopyInfo.Size = new System.Drawing.Size(75, 23);
-			this.IDC_bCopyInfo.TabIndex = 6;
-			this.IDC_bCopyInfo.Text = "copy info";
-			this.IDC_bCopyInfo.UseVisualStyleBackColor = true;
-			this.IDC_bCopyInfo.Click += new System.EventHandler(this.IDC_bCopyInfo_Click);
-			// 
-			// IDC_tbDefaultWebProxy
-			// 
-			this.IDC_tbDefaultWebProxy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.IDC_tbDefaultWebProxy.Location = new System.Drawing.Point(129, 34);
-			this.IDC_tbDefaultWebProxy.Name = "IDC_tbDefaultWebProxy";
-			this.IDC_tbDefaultWebProxy.Size = new System.Drawing.Size(422, 20);
-			this.IDC_tbDefaultWebProxy.TabIndex = 10;
-			// 
-			// IDC_tbSystemWebProxy
-			// 
-			this.IDC_tbSystemWebProxy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.IDC_tbSystemWebProxy.Location = new System.Drawing.Point(129, 60);
-			this.IDC_tbSystemWebProxy.Name = "IDC_tbSystemWebProxy";
-			this.IDC_tbSystemWebProxy.Size = new System.Drawing.Size(422, 20);
-			this.IDC_tbSystemWebProxy.TabIndex = 11;
-			// 
-			// IDC_tbRegistry
-			// 
-			this.IDC_tbRegistry.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.IDC_tbRegistry.Location = new System.Drawing.Point(129, 86);
-			this.IDC_tbRegistry.Name = "IDC_tbRegistry";
-			this.IDC_tbRegistry.Size = new System.Drawing.Size(422, 20);
-			this.IDC_tbRegistry.TabIndex = 12;
-			// 
-			// label2
-			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(6, 89);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(45, 13);
-			this.label2.TabIndex = 13;
-			this.label2.Text = "Registry";
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(6, 37);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(90, 13);
+			this.label4.TabIndex = 15;
+			this.label4.Text = "DefaultWebProxy";
 			// 
 			// label3
 			// 
@@ -170,14 +137,69 @@
 			this.label3.TabIndex = 14;
 			this.label3.Text = "SystemWebProxy";
 			// 
-			// label4
+			// label2
 			// 
-			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(6, 37);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(90, 13);
-			this.label4.TabIndex = 15;
-			this.label4.Text = "DefaultWebProxy";
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(6, 89);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(45, 13);
+			this.label2.TabIndex = 13;
+			this.label2.Text = "Registry";
+			// 
+			// IDC_tbRegistry
+			// 
+			this.IDC_tbRegistry.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.IDC_tbRegistry.Location = new System.Drawing.Point(129, 86);
+			this.IDC_tbRegistry.Name = "IDC_tbRegistry";
+			this.IDC_tbRegistry.Size = new System.Drawing.Size(422, 20);
+			this.IDC_tbRegistry.TabIndex = 12;
+			// 
+			// IDC_tbSystemWebProxy
+			// 
+			this.IDC_tbSystemWebProxy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.IDC_tbSystemWebProxy.Location = new System.Drawing.Point(129, 60);
+			this.IDC_tbSystemWebProxy.Name = "IDC_tbSystemWebProxy";
+			this.IDC_tbSystemWebProxy.Size = new System.Drawing.Size(422, 20);
+			this.IDC_tbSystemWebProxy.TabIndex = 11;
+			// 
+			// IDC_tbDefaultWebProxy
+			// 
+			this.IDC_tbDefaultWebProxy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.IDC_tbDefaultWebProxy.Location = new System.Drawing.Point(129, 34);
+			this.IDC_tbDefaultWebProxy.Name = "IDC_tbDefaultWebProxy";
+			this.IDC_tbDefaultWebProxy.Size = new System.Drawing.Size(422, 20);
+			this.IDC_tbDefaultWebProxy.TabIndex = 10;
+			// 
+			// IDC_bCopyInfo
+			// 
+			this.IDC_bCopyInfo.Location = new System.Drawing.Point(12, 245);
+			this.IDC_bCopyInfo.Name = "IDC_bCopyInfo";
+			this.IDC_bCopyInfo.Size = new System.Drawing.Size(75, 23);
+			this.IDC_bCopyInfo.TabIndex = 6;
+			this.IDC_bCopyInfo.Text = "copy info";
+			this.IDC_bCopyInfo.UseVisualStyleBackColor = true;
+			this.IDC_bCopyInfo.Click += new System.EventHandler(this.IDC_bCopyInfo_Click);
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(6, 115);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(90, 13);
+			this.label5.TabIndex = 7;
+			this.label5.Text = "HttpWebRequest";
+			// 
+			// IDC_tbHttpWebRequest
+			// 
+			this.IDC_tbHttpWebRequest.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.IDC_tbHttpWebRequest.Location = new System.Drawing.Point(129, 112);
+			this.IDC_tbHttpWebRequest.Name = "IDC_tbHttpWebRequest";
+			this.IDC_tbHttpWebRequest.Size = new System.Drawing.Size(422, 20);
+			this.IDC_tbHttpWebRequest.TabIndex = 8;
 			// 
 			// Form1
 			// 
@@ -216,6 +238,8 @@
 		private System.Windows.Forms.TextBox IDC_tbRegistry;
 		private System.Windows.Forms.TextBox IDC_tbSystemWebProxy;
 		private System.Windows.Forms.TextBox IDC_tbDefaultWebProxy;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.TextBox IDC_tbHttpWebRequest;
 	}
 }
 

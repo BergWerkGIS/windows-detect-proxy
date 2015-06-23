@@ -42,11 +42,13 @@ namespace windows_detect_proxy {
 			IDC_tbDefaultWebProxy.Text = string.Empty;
 			IDC_tbSystemWebProxy.Text = string.Empty;
 			IDC_tbRegistry.Text = string.Empty;
+			IDC_tbHttpWebRequest.Text = string.Empty;
 
 			try {
 				Cursor = Cursors.WaitCursor;
 				webRequestDefaultWebProxy();
 				webRequestGetSystemWebProxy();
+				httpWebRequest();
 				readRegistry();
 			}
 			finally {
@@ -85,10 +87,10 @@ namespace windows_detect_proxy {
 				IWebProxy proxy = WebRequest.GetSystemWebProxy();
 				Uri proxyUri = proxy.GetProxy( _TargetUri );
 				string proxyUrl = proxyUri.AbsoluteUri;
-				if( proxyUrl.Equals( _TargetUrl, StringComparison.OrdinalIgnoreCase )){
+				if (proxyUrl.Equals( _TargetUrl, StringComparison.OrdinalIgnoreCase )) {
 					log( "no proxy" );
-					IDC_tbSystemWebProxy.Text=string.Empty;
-				}else{
+					IDC_tbSystemWebProxy.Text = string.Empty;
+				} else {
 					log( proxyUrl );
 					IDC_tbSystemWebProxy.Text = proxyUrl;
 				}
@@ -99,6 +101,29 @@ namespace windows_detect_proxy {
 			}
 		}
 
+
+		private void httpWebRequest() {
+
+			try {
+				log( "== testing HttpWebRequest ==" );
+
+				HttpWebRequest request = (HttpWebRequest)WebRequest.Create( _TargetUri );
+				IWebProxy proxy = request.Proxy;
+				Uri proxyUri=proxy.GetProxy(_TargetUri);
+				string proxyUrl = proxyUri.AbsoluteUri;
+				if (proxyUrl.Equals( _TargetUrl, StringComparison.OrdinalIgnoreCase )) {
+					log( "no proxy" );
+					IDC_tbHttpWebRequest.Text = string.Empty;
+				} else {
+					log( proxyUrl );
+					IDC_tbHttpWebRequest.Text = proxyUrl;
+				}
+				testRequest( proxy );
+			}
+			catch (Exception ex) {
+				log( ex.ToString(), true );
+			}
+		}
 
 		private void readRegistry() {
 
