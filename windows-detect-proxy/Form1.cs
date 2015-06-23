@@ -21,6 +21,7 @@ namespace windows_detect_proxy {
 
 		private string _TargetUrl;
 		private Uri _TargetUri;
+		private readonly string NO_PROXY = "no proxy";
 
 
 		private void IDC_eExit_Click( object sender, EventArgs e ) {
@@ -67,8 +68,8 @@ namespace windows_detect_proxy {
 				Uri proxyUri = proxy.GetProxy( _TargetUri );
 				string proxyUrl = proxyUri.AbsoluteUri;
 				if (proxyUrl.Equals( _TargetUrl, StringComparison.OrdinalIgnoreCase )) {
-					log( "no proxy" );
-					IDC_tbDefaultWebProxy.Text = string.Empty;
+					log( NO_PROXY );
+					IDC_tbDefaultWebProxy.Text = NO_PROXY;
 				} else {
 					log( proxyUrl );
 					IDC_tbDefaultWebProxy.Text = proxyUrl;
@@ -88,8 +89,8 @@ namespace windows_detect_proxy {
 				Uri proxyUri = proxy.GetProxy( _TargetUri );
 				string proxyUrl = proxyUri.AbsoluteUri;
 				if (proxyUrl.Equals( _TargetUrl, StringComparison.OrdinalIgnoreCase )) {
-					log( "no proxy" );
-					IDC_tbSystemWebProxy.Text = string.Empty;
+					log( NO_PROXY );
+					IDC_tbSystemWebProxy.Text = NO_PROXY;
 				} else {
 					log( proxyUrl );
 					IDC_tbSystemWebProxy.Text = proxyUrl;
@@ -109,11 +110,11 @@ namespace windows_detect_proxy {
 
 				HttpWebRequest request = (HttpWebRequest)WebRequest.Create( _TargetUri );
 				IWebProxy proxy = request.Proxy;
-				Uri proxyUri=proxy.GetProxy(_TargetUri);
+				Uri proxyUri = proxy.GetProxy( _TargetUri );
 				string proxyUrl = proxyUri.AbsoluteUri;
 				if (proxyUrl.Equals( _TargetUrl, StringComparison.OrdinalIgnoreCase )) {
-					log( "no proxy" );
-					IDC_tbHttpWebRequest.Text = string.Empty;
+					log( NO_PROXY );
+					IDC_tbHttpWebRequest.Text = NO_PROXY;
 				} else {
 					log( proxyUrl );
 					IDC_tbHttpWebRequest.Text = proxyUrl;
@@ -131,7 +132,7 @@ namespace windows_detect_proxy {
 				log( "== testing registry settings ==" );
 
 				WebProxy proxy = null;
-				IDC_tbRegistry.Text = string.Empty;
+				IDC_tbRegistry.Text = NO_PROXY;
 
 				RegistryKey iSettings = Registry.
 					CurrentUser.
@@ -146,12 +147,12 @@ namespace windows_detect_proxy {
 					} else {
 						int proxyEnable = Convert.ToInt32( objEnable );
 						if (0 == proxyEnable) {
-							log( "no proxy" );
+							log( NO_PROXY );
 						} else {
 							log( "proxy enabled via registry" );
 							object objProxy = iSettings.GetValue( "ProxyServer" );
 							if (null == objProxy) {
-								log( "no proxy set", true );
+								log( "proxy enabled, but no proxy set", true );
 							} else {
 								string proxyUrl = objProxy.ToString();
 								log( proxyUrl );
